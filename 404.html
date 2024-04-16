@@ -5,31 +5,31 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Loading Page</title>
 <style>
-    body {
-        background-color: #333;
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        height: 100vh;
-        margin: 0;
-        font-family: Arial, sans-serif;
-    }
-    
-    .loading-text {
-        color: white;
-        font-size: 120px;
-        text-align: center;
-    }
+  body {
+    background-color: #333;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    margin: 0;
+    font-family: Arial, sans-serif;
+  }
+  .loading-text {
+    color: white;
+    font-size: 120px;
+    font-weight: bold;
+  }
 </style>
-</head>
-<body>
-<div class="loading-text">loading...</div>
-
 <script>
+  window.onload = function() {
     // 等待2秒后跳转
     setTimeout(function() {
-        window.location.href = 'https://furika46.github.io/music';
+      window.location.href = 'https://furika46.github.io/music';
     }, 2000);
+  };
 </script>
+</head>
+<body>
+  <div class="loading-text">loading...</div>
 </body>
 </html>
