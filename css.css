@@ -1,0 +1,38 @@
+body, html {
+    margin: 0;
+    padding: 0;
+    height: 100%;
+    overflow-x: hidden;
+}
+
+.intro-page {
+    background-image: url('fnn.jpg'); /* 替换为您的背景图片URL */
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: center;
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.intro-container {
+    background-color: #fff;
+    border-radius: 20px; /* 圆角大小，根据需要调整 */
+    padding: 20px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* 阴影效果，增加立体感 */
+    text-align: center;
+}
+
+.intro-title {
+    margin: 0;
+    padding: 0;
+    font-size: 24px; /* 标题字体大小，根据需要调整 */
+    color: #333; /* 标题颜色，根据需要调整 */
+}
+
+.intro-description {
+    margin-top: 10px;
+    font-size: 16px; /* 介绍字体大小，根据需要调整 */
+    color: #666; /* 介绍颜色，根据需要调整 */
+}
