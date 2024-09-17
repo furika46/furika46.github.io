@@ -1,0 +1,204 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>木鱼</title>
+    <style>
+
+/* Updated styles.css */
+body {
+    font-family: Arial, sans-serif;
+    text-align: center;
+    background-color: #f4f4f4;
+}
+
+#game-container {
+    position: relative;
+    margin-top: 50px;
+}
+
+#boss-health-bar {
+    width: 80%;
+    height: 30px;
+    background-color: #70d43c;
+    margin: 0 auto;
+    border:none;
+    border-radius: 15px;
+    transition: width 0.5s;
+}
+
+.css-button {
+    position: fixed;
+    bottom: 20px;
+    left: 20px;
+    padding: 10px 20px;
+    background-color: #007bff;
+    color: white;
+    border: none;
+    border-radius: 25px;
+    cursor: pointer;
+    transition: transform 0.3s;
+}
+
+.css-button:hover {
+    transform: scale(1.1);
+}
+
+.popup {
+    display: none;
+    position: fixed;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+    background-color: white;
+    padding: 20px;
+    border: 1px solid #ccc;
+    border-radius: 10px;
+    z-index: 1000;
+    opacity: 0;
+    transition: opacity 0.5s;
+}
+
+.popup.active {
+    display: block;
+    opacity: 1;
+}
+
+.close-btn {
+    position: absolute;
+    top: 5px;
+    right: 10px;
+    cursor: pointer;
+}
+
+#retry-btn {
+    display: none;
+    margin-top: 20px;
+    padding: 10px 20px;
+    background-color: #28a745;
+    color: white;
+    border: none;
+    border-radius: 25px;
+    cursor: pointer;
+    transition: transform 0.3s;
+}
+
+#retry-btn:hover {
+    transform: scale(1.1);
+}
+
+#attack-btn {
+    padding: 10px 20px;
+    background-color: #000;
+    color: white;
+    border: none;
+    border-radius: 25px;
+    cursor: pointer;
+    transition: transform 0.3s;
+}
+
+#attack-btn:hover {
+    transform: scale(1.1);
+}
+
+
+    </style>
+</head>
+<body>
+    <h6>by iw46</h6>
+    <div id="game-container">
+        <div id="boss-health-bar"></div>
+        <button id="attack-btn">攻击</button>
+        <div id="player-health">玩家血量: 100</div>
+        <button id="css-btn" class="css-button">信息</button>
+        <div id="css-popup" class="popup">
+            
+<!-- 在 popup 内添加一个元素来显示 boss 打败玩家的次数 -->
+    <span class="close-btn">&times;</span>
+    <p>已击败 <span id="defeated-count">0</span> 次</p>
+    <p>Boss 打败玩家次数: <span id="boss-defeated-player">0</span> 次</p>
+
+
+        </div>
+        <button id="retry-btn" style="display:none;">生成</button>
+    </div>
+    <script>
+        let bossHealth = 100;
+        let playerHealth = 100;
+        let defeatedCount = 0;
+        let dev = 0;
+        let bossDefeatedPlayer = 0; 
+        document.getElementById('attack-btn').addEventListener('click', attackBoss);
+        document.getElementById('css-btn').addEventListener('click', togglePopup);
+        document.getElementById('retry-btn').addEventListener('click', resetGame);
+        document.querySelector('.close-btn').addEventListener('click', togglePopup);
+
+        function attackBoss() {
+            const damage = Math.floor(Math.random() * 21) + 5;
+            bossHealth -= damage;
+            updateBossHealthBar();
+
+            if (bossHealth <= 0) {
+                bossDies();
+                return;
+            }
+
+            setTimeout(() => {
+                bossAttacks();
+            }, Math.floor(Math.random() * 4000) + 1000);
+        }
+
+        function bossAttacks() {
+            const damage = Math.floor(Math.random() * 21) + 5;
+            playerHealth -= damage;
+            document.getElementById('player-health').textContent = `玩家血量: ${playerHealth}`;
+
+            if (playerHealth <= 0) {
+                playerDies();
+            }
+        }
+
+        function updateBossHealthBar() {
+            const bossHealthBar = document.getElementById('boss-health-bar');
+            bossHealthBar.style.width = `${bossHealth}%`;
+        }
+
+        function bossDies() {
+            document.getElementById('retry-btn').style.display = 'block';
+            defeatedCount++;
+            dev++;
+             alert('你刚刚击败boss'+dev+'次，可在信息中查看')
+            document.getElementById('defeated-count').textContent = defeatedCount;
+            resetGame();
+           
+        }
+
+        function playerDies() {
+    alert('你被 初级boss 击败');
+    bossDefeatedPlayer++; 
+    document.getElementById('boss-defeated-player').textContent = bossDefeatedPlayer;
+    resetGame();
+}
+
+        function resetGame() {
+            bossHealth = 100;
+            playerHealth = 100;
+            updateBossHealthBar();
+            document.getElementById('player-health').textContent = `Player Health: 100`;
+            document.getElementById('retry-btn').style.display = 'none';
+        }
+
+
+function togglePopup() {
+    const popup = document.getElementById('css-popup');
+    popup.classList.toggle('active');
+}
+
+
+
+
+    </script>
+</body>
+</html>
